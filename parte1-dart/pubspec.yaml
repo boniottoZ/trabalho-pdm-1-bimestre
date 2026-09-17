@@ -1,0 +1,7 @@
+name: parte1_dart
+description: Parte 1 - Modelagem de domínio em Dart puro (Loja de Instrumentos Musicais)
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
