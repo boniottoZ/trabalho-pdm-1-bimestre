@@ -1,0 +1,14 @@
+{
+  "roots": [
+    "parte1_dart"
+  ],
+  "packages": [
+    {
+      "name": "parte1_dart",
+      "version": "1.0.0",
+      "dependencies": [],
+      "devDependencies": []
+    }
+  ],
+  "configVersion": 1
+}
