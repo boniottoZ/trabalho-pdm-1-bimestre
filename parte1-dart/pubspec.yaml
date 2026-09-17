@@ -1,9 +1,0 @@
-name: parte1_dart
-description: >
-  Trabalho do 1º bimestre - Parte 1 (Dart puro).
-  Tema: coleção de tênis.
-version: 1.0.0
-publish_to: "none"
-
-environment:
-  sdk: ^3.0.0
