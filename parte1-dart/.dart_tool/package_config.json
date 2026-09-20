@@ -9,8 +9,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.13.2",
-  "flutterRoot": "file:///C:/Users/guilu/OneDrive/Documents/flutter",
-  "flutterVersion": "3.47.2",
-  "pubCache": "file:///C:/Users/guilu/AppData/Local/Pub/Cache"
+  "generatorVersion": "3.13.4",
+  "flutterRoot": "file:///C:/flutter/flutter",
+  "flutterVersion": "3.47.5",
+  "pubCache": "file:///C:/Users/Thaba/AppData/Local/Pub/Cache"
 }

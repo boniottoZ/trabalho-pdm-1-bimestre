@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/instrumento.dart';
+import '../models/instrumento_eletronico.dart';
 
 /// Exercício 9 — Entrada de dados
 /// Recurso obrigatório: TextFormField
@@ -14,13 +15,14 @@ class CadastroPage extends StatefulWidget {
 class _CadastroPageState extends State<CadastroPage> {
   final _nomeController = TextEditingController();
   final _precoController = TextEditingController();
-  final _estoqueController = TextEditingController();
+  final _anoController = TextEditingController();
+  bool _ehEletronico = false;
 
   @override
   void dispose() {
     _nomeController.dispose();
     _precoController.dispose();
-    _estoqueController.dispose();
+    _anoController.dispose();
     super.dispose();
   }
 
@@ -28,12 +30,14 @@ class _CadastroPageState extends State<CadastroPage> {
     final nome = _nomeController.text.trim();
     final preco =
         double.tryParse(_precoController.text.replaceAll(',', '.')) ?? 0.0;
-    final estoque = int.tryParse(_estoqueController.text) ?? 0;
+    final ano = int.tryParse(_anoController.text) ?? 0;
 
-    if (nome.isEmpty) {
+    if (nome.isEmpty || preco <= 0 || ano < 1900 || ano > DateTime.now().year) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Informe o nome do instrumento.'),
+          content: const Text(
+            'Informe nome, preço válido e um ano de fabricação válido.',
+          ),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -42,12 +46,20 @@ class _CadastroPageState extends State<CadastroPage> {
       return;
     }
 
-    final novoInstrumento = Instrumento(
-      nome: nome,
-      preco: preco,
-      anoFabricacao: DateTime.now(),
-      estoque: estoque,
-    );
+    final novoInstrumento = _ehEletronico
+        ? InstrumentoEletronico(
+            nome: nome,
+            preco: preco,
+            anoFabricacao: DateTime(ano),
+            estoque: 1,
+            voltagem: 110.0,
+          )
+        : Instrumento(
+            nome: nome,
+            preco: preco,
+            anoFabricacao: DateTime(ano),
+            estoque: 1,
+          );
 
     Navigator.of(context).pop(novoInstrumento);
   }
@@ -87,11 +99,33 @@ class _CadastroPageState extends State<CadastroPage> {
           ),
           const SizedBox(height: 16),
           TextFormField(
-            controller: _estoqueController,
+            controller: _anoController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              labelText: 'Estoque',
-              prefixIcon: Icon(Icons.inventory_2),
+              labelText: 'Ano de fabricação',
+              prefixIcon: Icon(Icons.calendar_today),
+            ),
+          ),
+          const SizedBox(height: 16),
+          InputDecorator(
+            decoration: const InputDecoration(
+              labelText: 'Tipo de instrumento',
+              prefixIcon: Icon(Icons.category),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<bool>(
+                value: _ehEletronico,
+                isExpanded: true,
+                items: const [
+                  DropdownMenuItem(value: false, child: Text('Normal')),
+                  DropdownMenuItem(value: true, child: Text('Eletrônico')),
+                ],
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() => _ehEletronico = value);
+                  }
+                },
+              ),
             ),
           ),
           const SizedBox(height: 28),

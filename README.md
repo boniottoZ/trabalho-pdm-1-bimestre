@@ -23,7 +23,7 @@ instrumentos e calcula o valor total em estoque a partir dela).
 | 6  | Cartão              | `parte2-flutter/lib/screens/widgets/cartao_instrumento.dart:20`                | Cada item da lista                                          |
 | 7  | Lista               | `parte2-flutter/lib/screens/home_page.dart:103`                               | Lista rolável com seis itens                                |
 | 8  | Navegação           | `parte2-flutter/lib/screens/home_page.dart:110`                               | Toque no item abre o detalhe                                |
-| 9  | Formulário          | `parte2-flutter/lib/screens/cadastro_page.dart:15-17` (controllers), `:58,67,77` (campos) | Tela de cadastro                                            |
+| 9  | Formulário          | `parte2-flutter/lib/screens/cadastro_page.dart` (controllers, campos e seletor de tipo) | Cadastro com nome, preço, ano e tipo                         |
 | 10 | Estado              | `parte2-flutter/lib/screens/home_page.dart:16` (StatefulWidget), `:75` (setState) | Item novo na lista e total atualizado                       |
 
 ## Justificativa: composição em vez de herança (Exercício 3)
@@ -50,8 +50,28 @@ dart run
 cd parte2-flutter
 flutter pub get
 flutter analyze
-flutter run
+flutter run -d chrome
 ```
+
+O comando `flutter run` precisa de um dispositivo selecionado. Para conferir os
+dispositivos disponíveis, use `flutter devices`. Neste projeto, `chrome` é uma
+opção prática para executar a aplicação no computador. Também é possível usar
+`flutter run -d windows` caso o suporte para Windows esteja disponível.
+
+Para executar as duas partes a partir da raiz do repositório, use dois terminais
+ou volte para a raiz com `cd ..` antes de entrar na outra pasta. A Parte 1 roda
+no terminal e a Parte 2 abre a interface Flutter no dispositivo escolhido.
+
+## Onde cada parte é demonstrada
+
+A Parte 1 é um projeto Dart puro e deve ser demonstrada com `dart run`. Ela
+imprime os quatro blocos do relatório e não possui cadastro interativo. A Parte
+2 é o aplicativo Flutter e contém a lista, o detalhe e o cadastro. As classes
+dos modelos aparecem nas duas pastas de propósito: o enunciado aceita a cópia
+dos modelos para manter os projetos independentes. O cadastro da Parte 2
+permite informar nome, preço e ano de fabricação, escolher entre instrumento
+normal ou eletrônico e adiciona o novo item à lista. O estoque inicial do item
+cadastrado é 1, conforme o limite de campos do formulário.
 
 ## Estrutura do repositório
 
